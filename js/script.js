@@ -18,7 +18,7 @@ class Produto {
 
     listaTabela() {
         let tbody = document.getElementById('tbody');
-        tbody.innertext = '';
+        tbody.innerText = '';
 
         for(let i = 0; i < this.arrayProdutos.length; i++) {
             let tr = tbody.insertRow();
@@ -35,10 +35,11 @@ class Produto {
             td_id.classList.add('center');
 
             let imgEdit = document.createElement('img');
-            imgEdit.src = 'img/edit.svg';
+            imgEdit.src = './assets/edit.svg';
 
             let imgDelete = document.createElement('img');
-            imgDelete.src = 'img/delete.svg';
+            imgDelete.src = './assets/trash-2.svg';
+            imgDelete.setAttribute("onclick","produto.deletar("+ this.arrayProdutos[i].id+")");
 
             td_acoes.appendChild(imgEdit);
             td_acoes.appendChild(imgDelete);
@@ -85,8 +86,16 @@ class Produto {
         document.getElementById('preco').value = '';
     }
 
-    deletar() {
-        alert('deletar');
+    deletar(id) {
+
+        let tbody = document.getElementById('tbody');
+
+        for(let i = 0; i < this.arrayProdutos.length; i++) {
+            if(this.arrayProdutos[i].id == id) {
+                this.arrayProdutos.splice(i, 1);
+                tbody.deleteRow(i);
+            }
+        }
     }
 }
 
